@@ -3,4 +3,6 @@
 .settings
 .idea
 target/
+dist/
 *.iml
+node_modules/
