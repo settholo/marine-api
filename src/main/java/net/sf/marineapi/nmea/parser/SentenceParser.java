@@ -422,14 +422,13 @@ public class SentenceParser implements Sentence {
 	 * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
 	 * 
 	 * @param index Field index
-	 * @return Field value as String
-	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the field is
-	 *             empty
+	 * @return Field value as String or null
 	 */
 	protected final String getStringValue(int index) {
 		String value = fields.get(index);
 		if (value == null || "".equals(value)) {
-			throw new DataNotAvailableException("Data not available");
+			/*throw new DataNotAvailableException("Data not available");*/
+			return null;
 		}
 		return value;
 	}
