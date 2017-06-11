@@ -174,6 +174,10 @@ class GGAParser extends PositionParser implements GGASentence {
 	 */
 	public Time getTime() {
 		String str = getStringValue(UTC_TIME);
+		if(str==null)
+		{
+			return null;
+		}
 		return new Time(str);
 	}
 

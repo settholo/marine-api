@@ -84,6 +84,10 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 */
 	public Time getTime() {
 		String str = getStringValue(UTC_TIME);
+		if(str==null)
+		{
+			return null;
+		}
 		return new Time(str);
 	}
 

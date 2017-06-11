@@ -85,7 +85,8 @@ class GSAParser extends SentenceParser implements GSASentence {
 	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getMode()
 	 */
 	public FaaMode getMode() {
-		return FaaMode.valueOf(getCharValue(GPS_MODE));
+		char charValue = getCharValue(GPS_MODE, 'N');
+		return FaaMode.valueOf(charValue);
 	}
 
 	/*
@@ -104,7 +105,11 @@ class GSAParser extends SentenceParser implements GSASentence {
 		List<String> result = new ArrayList<String>();
 		for (int i = FIRST_SV; i <= LAST_SV; i++) {
 			if (hasValue(i)) {
-				result.add(getStringValue(i));
+				String stringValue = getStringValue(i);
+				if(stringValue!=null)
+				{
+					result.add(stringValue);
+				}
 			}
 		}
 		return result.toArray(new String[result.size()]);

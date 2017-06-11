@@ -74,7 +74,12 @@ class GNSParser extends PositionParser implements GNSSentence {
 
     @Override
     public Time getTime() {
-        return new Time(getStringValue(UTC_TIME));
+        String stringValue = getStringValue(UTC_TIME);
+        if(stringValue==null)
+        {
+            return null;
+        }
+        return new Time(stringValue);
     }
 
     @Override
@@ -95,18 +100,30 @@ class GNSParser extends PositionParser implements GNSSentence {
     @Override
     public Mode getGpsMode() {
         String modes = getStringValue(MODE);
+        if(modes==null)
+        {
+            return null;
+        }
         return Mode.valueOf(modes.charAt(GPS_MODE));
     }
 
     @Override
     public void setGpsMode(Mode gps) {
         String modes = getStringValue(MODE);
+        if(modes==null)
+        {
+            return;
+        }
         setStringValue(MODE, gps.toChar() + modes.substring(GNS_MODE));
     }
 
     @Override
     public Mode getGlonassMode() {
         String modes = getStringValue(MODE);
+        if(modes==null)
+        {
+            return null;
+        }
         return Mode.valueOf(modes.charAt(GNS_MODE));
     }
 
@@ -114,6 +131,10 @@ class GNSParser extends PositionParser implements GNSSentence {
     public void setGlonassMode(Mode gns) {
 
         String modes = getStringValue(MODE);
+        if(modes==null)
+        {
+            return;
+        }
 
         StringBuffer sb = new StringBuffer(modes.length());
         sb.append(modes.charAt(GPS_MODE));
@@ -129,6 +150,10 @@ class GNSParser extends PositionParser implements GNSSentence {
     @Override
     public Mode[] getAdditionalModes() {
         String mode = getStringValue(MODE);
+        if(mode==null)
+        {
+            return new Mode[0];
+        }
         if(mode.length() == 2) {
             return new Mode[0];
         }
@@ -143,6 +168,10 @@ class GNSParser extends PositionParser implements GNSSentence {
     @Override
     public void setAdditionalModes(Mode... modes) {
         String current = getStringValue(MODE);
+        if(modes==null)
+        {
+            return;
+        }
         StringBuffer sb = new StringBuffer(modes.length + 2);
         sb.append(current.substring(0, VAR_MODE));
         for (Mode m : modes) {

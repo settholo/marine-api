@@ -373,6 +373,23 @@ public class SentenceParser implements Sentence {
 	 */
 	protected final char getCharValue(int index) {
 		String val = getStringValue(index);
+		if(val==null)
+		{
+			return '_';
+		}
+		if (val.length() > 1) {
+			String msg = String.format("Expected char, found String [%s]", val);
+			throw new ParseException(msg);
+		}
+		return val.charAt(0);
+	}
+
+	protected final char getCharValue(int index, char defaultValue) {
+		String val = getStringValue(index);
+		if(val==null)
+		{
+			return defaultValue;
+		}
 		if (val.length() > 1) {
 			String msg = String.format("Expected char, found String [%s]", val);
 			throw new ParseException(msg);
@@ -389,7 +406,12 @@ public class SentenceParser implements Sentence {
 	protected final double getDoubleValue(int index) {
 		double value;
 		try {
-			value = Double.parseDouble(getStringValue(index));
+			String stringValue = getStringValue(index);
+			if(stringValue==null)
+			{
+				return -1;
+			}
+			value = Double.parseDouble(stringValue);
 		} catch (NumberFormatException ex) {
 			throw new ParseException("Field does not contain double value", ex);
 		}
@@ -405,7 +427,12 @@ public class SentenceParser implements Sentence {
 	protected final int getIntValue(int index) {
 		int value;
 		try {
-			value = Integer.parseInt(getStringValue(index));
+			String stringValue = getStringValue(index);
+			if(stringValue==null)
+			{
+				return -1;
+			}
+			value = Integer.parseInt(stringValue);
 		} catch (NumberFormatException ex) {
 			throw new ParseException("Field does not contain integer value", ex);
 		}
