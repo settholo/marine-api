@@ -25,7 +25,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 	<parent>
 		<groupId>com.appelsinsw</groupId>
 		<artifactId>asw-app-parent-pom</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<groupId>net.sf.marineapi</groupId>
